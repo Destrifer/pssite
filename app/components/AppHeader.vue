@@ -2,11 +2,39 @@
 import { ref, watch, onMounted, onBeforeUnmount } from "vue";
 
 const open = ref(false);
+
 const links = [
   { to: "/", label: "Обо мне" },
   { to: "/services", label: "Практика / Тренинги" },
   { to: "/blog", label: "Библиотека" },
   { to: "/contacts", label: "Контакты" },
+];
+
+// Группы для бургер-меню
+const drawerSections = [
+  {
+    title: "Запись",
+    items: [{ to: "/book", label: "Записаться на встречу" }],
+  },
+  {
+    title: "Обучение",
+    items: [
+      { to: "/courses", label: "Онлайн-курс" },
+      { to: "/materials", label: "Самостоятельные материалы" },
+    ],
+  },
+  {
+    title: "Инфо",
+    items: [
+      { to: "/about", label: "Обо мне" },
+      { to: "/approach", label: "Как это проходит" },
+      { to: "/contacts", label: "Контакты" },
+    ],
+  },
+  {
+    title: "Библиотека знаний",
+    items: [{ to: "/library", label: "Все материалы" }],
+  },
 ];
 
 // Закрытие по Esc
@@ -16,7 +44,7 @@ const onKey = (e) => {
 onMounted(() => window.addEventListener("keydown", onKey));
 onBeforeUnmount(() => window.removeEventListener("keydown", onKey));
 
-// Блокировка скролла бэкграунда, когда открыт drawer
+// Блокировка скролла бэкграунда
 watch(open, (v) => {
   document.documentElement.style.overflow = v ? "hidden" : "";
 });
@@ -42,7 +70,7 @@ watch(open, (v) => {
         </div>
       </NuxtLink>
 
-      <!-- Desktop nav (центр) -->
+      <!-- Desktop nav -->
       <ul class="hidden md:flex items-center gap-6">
         <li v-for="l in links" :key="l.to">
           <NuxtLink
@@ -56,11 +84,12 @@ watch(open, (v) => {
         </li>
       </ul>
 
+      <!-- Контакты -->
       <div class="flex items-center gap-2">
         <!-- ПК: просто номер -->
-        <span class="hidden md:inline text-lg font-semibold select-all"
-          >+7 (999) 888-77-66</span
-        >
+        <span class="hidden md:inline text-lg font-semibold select-all">
+          +7 (999) 888-77-66
+        </span>
 
         <!-- Мобильные: ссылка для звонка -->
         <a
@@ -72,6 +101,7 @@ watch(open, (v) => {
       </div>
 
       <div class="flex items-center gap-2">
+        <!-- Соцсети на десктопе -->
         <a
           href="https://wa.me/..."
           class="hidden md:inline-flex"
@@ -88,10 +118,8 @@ watch(open, (v) => {
         </a>
       </div>
 
-      <!-- Right: burger (и на десктопе, и на мобиле) -->
+      <!-- Right: burger -->
       <div class="flex items-center gap-2">
-        <!-- (опционально) иконки WA/TG -->
-
         <button
           class="inline-flex items-center justify-center rounded border border-white px-3 py-2 text-white hover:bg-white/20 transition"
           @click="open = !open"
@@ -132,45 +160,47 @@ watch(open, (v) => {
       </button>
     </div>
 
-    <nav class="mt-2">
-      <ul class="space-y-1">
-        <li v-for="l in links" :key="l.to">
-          <NuxtLink
-            :to="l.to"
-            class="block rounded-lg px-3 py-2 hover:bg-white/10 transition [&.router-link-active]:bg-white/10 [&.router-link-active]:text-yellow-300"
-            @click="open = false"
-          >
-            {{ l.label }}
-          </NuxtLink>
-        </li>
-      </ul>
+    <!-- Секции -->
+    <nav class="mt-2 space-y-6">
+      <section
+        v-for="(sec, i) in drawerSections"
+        :key="sec.title"
+        class="border-t border-white/10 pt-4"
+        :class="{ 'border-t-0 pt-0': i === 0 }"
+      >
+        <h3 class="text-xs uppercase tracking-wide text-white/60 mb-2">
+          {{ sec.title }}
+        </h3>
+        <ul class="space-y-1">
+          <li v-for="item in sec.items" :key="item.to">
+            <NuxtLink
+              :to="item.to"
+              class="block rounded-lg px-3 py-2 hover:bg-white/10 transition [&.router-link-active]:bg-white/10 [&.router-link-active]:text-yellow-300"
+              @click="open = false"
+            >
+              {{ item.label }}
+            </NuxtLink>
+          </li>
+        </ul>
+      </section>
     </nav>
 
-    <div class="mt-auto pt-4 space-y-2">
-      <!-- Если нужна «Запись» внутри бургер-меню -->
-      <NuxtLink
-        to="/book"
-        class="block text-center rounded-xl px-4 py-2 border border-white/20 hover:bg-white/10 transition"
-        @click="open = false"
-      >
-        Записаться
-      </NuxtLink>
-
-      <!-- Соцсети -->
-      <div class="flex items-center justify-center gap-2 text-white/80">
-        <a
-          href="https://wa.me/..."
-          class="inline-flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10"
-        >
-          <!-- <Icon name="mdi:whatsapp" class="h-5 w-5" /> -->
-          WhatsApp
-        </a>
+    <!-- Соцсети -->
+    <div class="mt-auto pt-4 border-t border-white/10">
+      <div class="flex items-center justify-center gap-3 text-white/80">
         <a
           href="https://t.me/..."
-          class="inline-flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-white/10"
+          aria-label="Telegram"
         >
-          <!-- <Icon name="mdi:telegram" class="h-5 w-5" /> -->
-          Telegram
+          <Icon name="mdi:telegram" class="h-5 w-5" />
+        </a>
+        <a
+          href="https://wa.me/..."
+          class="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-white/10"
+          aria-label="WhatsApp"
+        >
+          <Icon name="mdi:whatsapp" class="h-5 w-5" />
         </a>
       </div>
     </div>
