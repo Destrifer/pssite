@@ -55,36 +55,38 @@ watch(open, (v) => {
     class="fixed inset-x-0 top-0 z-40 bg-black backdrop-blur border-b border-white/10 text-white"
   >
     <nav
-      class="mx-auto px-4 sm:px-6 lg:px-32 h-16 flex items-center justify-between"
+      class="mx-auto px-4 sm:px-6 xl:px-16 2xl:px-32 h-16 flex items-center justify-between"
     >
       <!-- Logo -->
       <NuxtLink to="/" class="flex items-center no-underline">
         <img src="/logo.svg" alt="" class="h-10 w-10 mr-2" />
-        <div class="flex flex-col md:flex-row leading-tight text-white">
+        <div class="flex flex-col xl:flex-row leading-tight text-white">
           <!-- Надпись -->
           <div
-            class="text-xs text-center md:text-left md:flex md:flex-col md:items-center md:pr-4 md:border-r md:border-white/20"
+            class="text-xs text-center xl:text-left xl:flex xl:flex-col xl:items-center xl:pr-4 xl:border-r xl:border-white/20"
           >
-            <span class="block md:hidden">Сайт психолога</span>
-            <span class="hidden md:block">Сайт</span>
-            <span class="hidden md:block">психолога</span>
+            <!-- До xl — одной строкой -->
+            <span class="block xl:hidden">Сайт психолога</span>
+            <!-- На xl и больше — в две строки -->
+            <span class="hidden xl:block">Сайт</span>
+            <span class="hidden xl:block">психолога</span>
           </div>
 
           <!-- ФИО -->
-          <span class="text-xl font-logo pt-1 md:pt-0 md:pl-4">
+          <span class="text-xl font-logo pt-1 xl:pt-0 xl:pl-4">
             Кораблева&nbsp;М.Н.
           </span>
         </div>
       </NuxtLink>
 
       <!-- Desktop nav -->
-      <ul class="hidden md:flex items-center gap-6">
+      <ul class="hidden lg:flex items-center gap-4 2xl:gap-6">
         <li v-for="l in links" :key="l.to">
           <NuxtLink
             :to="l.to"
-            class="transition hover:text-blue-500"
-            active-class="text-yellow-300 border-b-2 border-yellow-300 pb-1 hover:text-yellow-300"
-            exact-active-class="text-yellow-300 border-b-2 border-yellow-300 pb-1 hover:text-yellow-300"
+            class="text-sm 2xl:text-base px-2 py-1 2xl:px-3 2xl:py-2 transition hover:text-blue-500"
+            active-class="text-yellow-300 border-b-2 border-yellow-300 pb-0.5 2xl:pb-1 hover:text-yellow-300"
+            exact-active-class="text-yellow-300 border-b-2 border-yellow-300 pb-0.5 2xl:pb-1 hover:text-yellow-300"
           >
             {{ l.label }}
           </NuxtLink>
@@ -93,15 +95,15 @@ watch(open, (v) => {
 
       <!-- Контакты -->
       <div class="flex items-center gap-2">
-        <!-- ПК: просто номер -->
-        <span class="hidden lg:inline text-lg font-semibold select-all">
+        <!-- ПК и планшеты: просто номер -->
+        <span class="hidden md:inline text-lg font-semibold select-all">
           +7 (999) 888-77-66
         </span>
 
         <!-- Мобильные: ссылка для звонка -->
         <a
           href="tel:+79998887766"
-          class="lg:hidden inline-flex items-center justify-center rounded border border-white px-3 py-2 text-white hover:bg-white/20 transition"
+          class="md:hidden inline-flex items-center justify-center rounded border border-white px-3 py-2 text-white hover:bg-white/20 transition"
           aria-label="Позвонить"
         >
           <Icon name="mdi:phone" class="w-6 h-6" />
@@ -109,17 +111,17 @@ watch(open, (v) => {
       </div>
 
       <div class="flex items-center gap-2">
-        <!-- Соцсети на десктопе -->
+        <!-- Соцсети начиная со sm -->
         <a
           href="https://wa.me/..."
-          class="hidden md:inline-flex"
+          class="hidden sm:inline-flex"
           aria-label="WhatsApp"
         >
           <Icon name="mdi:whatsapp" class="text-3xl hover:text-[#25D366]" />
         </a>
         <a
           href="https://t.me/..."
-          class="hidden md:inline-flex"
+          class="hidden sm:inline-flex"
           aria-label="Telegram"
         >
           <Icon name="mdi:telegram" class="text-3xl hover:text-[#0088cc]" />
