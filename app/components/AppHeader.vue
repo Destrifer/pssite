@@ -94,9 +94,10 @@ watch(open, (v) => {
         <!-- Мобильные: ссылка для звонка -->
         <a
           href="tel:+79998887766"
-          class="md:hidden inline-flex items-center rounded-xl border border-yellow-400 px-3 py-1 hover:bg-yellow-400 hover:text-black transition"
+          class="md:hidden inline-flex items-center justify-center rounded border border-white px-3 py-2 text-white hover:bg-white/20 transition"
+          aria-label="Позвонить"
         >
-          📞 +7 (999) 888-77-66
+          <Icon name="mdi:phone" class="text-3xl" />
         </a>
       </div>
 
