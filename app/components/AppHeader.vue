@@ -97,7 +97,7 @@ watch(open, (v) => {
           class="md:hidden inline-flex items-center justify-center rounded border border-white px-3 py-2 text-white hover:bg-white/20 transition"
           aria-label="Позвонить"
         >
-          <Icon name="mdi:phone" class="text-3xl" />
+          <Icon name="mdi:phone" class="w-6 h-6" />
         </a>
       </div>
 
