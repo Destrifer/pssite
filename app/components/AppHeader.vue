@@ -60,15 +60,20 @@ watch(open, (v) => {
       <!-- Logo -->
       <NuxtLink to="/" class="flex items-center no-underline">
         <img src="/logo.svg" alt="" class="h-10 w-10 mr-2" />
-        <div class="flex leading-tight">
+        <div class="flex flex-col md:flex-row leading-tight text-white">
+          <!-- Надпись -->
           <div
-            class="hidden md:flex text-xs flex-col text-white items-center pr-4 border-r border-white/20"
+            class="text-xs text-center md:text-left md:flex md:flex-col md:items-center md:pr-4 md:border-r md:border-white/20"
           >
-            <span>Сайт</span><span>психолога</span>
+            <span class="block md:hidden">Сайт психолога</span>
+            <span class="hidden md:block">Сайт</span>
+            <span class="hidden md:block">психолога</span>
           </div>
-          <span class="text-xl text-white font-logo pl-0 md:pl-4"
-            >Кораблевой М.Н.</span
-          >
+
+          <!-- ФИО -->
+          <span class="text-xl font-logo pt-1 md:pt-0 md:pl-4">
+            Кораблева&nbsp;М.Н.
+          </span>
         </div>
       </NuxtLink>
 
