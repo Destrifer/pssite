@@ -62,11 +62,13 @@ watch(open, (v) => {
         <img src="/logo.svg" alt="" class="h-10 w-10 mr-2" />
         <div class="flex leading-tight">
           <div
-            class="hidden md:inline text-xs flex flex-col text-white items-center pr-4 border-r border-white/20"
+            class="hidden md:flex text-xs flex-col text-white items-center pr-4 border-r border-white/20"
           >
             <span>Сайт</span><span>психолога</span>
           </div>
-          <span class="text-xl text-white font-logo pl-4">Кораблевой М.Н.</span>
+          <span class="text-xl text-white font-logo pl-0 md:pl-4"
+            >Кораблевой М.Н.</span
+          >
         </div>
       </NuxtLink>
 
