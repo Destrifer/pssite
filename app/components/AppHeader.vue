@@ -74,7 +74,7 @@ watch(open, (v) => {
 
           <!-- ФИО -->
           <span class="text-xl font-logo pt-1 xl:pt-0 xl:pl-4">
-            Кораблева&nbsp;М.Н.
+            Кораблевой&nbsp;М.Н.
           </span>
         </div>
       </NuxtLink>
